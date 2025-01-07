@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use App\Models\User; // Assuming you have a User model
+use App\Models\User;
+use Illuminate\Database\Seeder; // Assuming you have a User model
 use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
