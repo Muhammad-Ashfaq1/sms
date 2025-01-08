@@ -11,8 +11,20 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'central_domain' => \App\Http\Middleware\EnsureCentralDomain::class,
+            'super_admin' => \App\Http\Middleware\SuperAdminMiddleware::class,
+            'tenancy' => \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
+            'prevent_access_from_central_domains' => \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
+        ]);
+
+        // Priority for tenancy middleware
+        $middleware->priority([
+            \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
+            \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
+        ]);
     })
+
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

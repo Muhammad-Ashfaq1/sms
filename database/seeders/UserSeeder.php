@@ -3,14 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Seeder; // Assuming you have a User model
-use Spatie\Permission\Models\Role;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         // Define users with their roles
@@ -47,17 +44,15 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        // Loop through users and create each user with assigned role
         foreach ($users as $user) {
-            // Create user and assign role
             $userInstance = User::updateOrCreate(
                 ['email' => $user['email']],
                 [
                     'name' => $user['name'],
-                    'password' => 'password',
+                    'password' => Hash::make('password'),
                 ]
             );
-            $userInstance->assignRole($userInstance['role']);
+            $userInstance->assignRole($user['role']);
         }
     }
 }

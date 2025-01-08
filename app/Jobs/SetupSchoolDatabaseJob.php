@@ -2,47 +2,57 @@
 
 namespace App\Jobs;
 
+use App\Models\School;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
+use Stancl\Tenancy\Database\DatabaseManager;
 
 class SetupSchoolDatabaseJob implements ShouldQueue
 {
-    use Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     */
-    public $school;
+    protected $school;
 
-    /**
-     * Create a new job instance.
-     */
     public function __construct(School $school)
     {
         $this->school = $school;
     }
 
-    /**
-     * Execute the job.
-     */
-    public function handle()
+    public function handle(DatabaseManager $databaseManager)
     {
-        // Create tenant database
-        DB::statement("CREATE DATABASE {$this->school->database}");
+        try {
+            // Create database for tenant
+            $databaseManager->createDatabase($this->school->tenant);
 
-        // Switch to the tenant database
-        tenancy()->initialize($this->school->id);
+            // Initialize tenancy
+            tenancy()->initialize($this->school->tenant);
 
-        // Run tenant migrations
-        Artisan::call('tenants:migrate', [
-            '--tenant' => $this->school->id,
-        ]);
+            // Run migrations
+            Artisan::call('migrate', [
+                '--database' => 'tenant',
+                '--path' => 'database/migrations/tenant',
+                '--force' => true,
+            ]);
 
-        // Optional: Seed tenant database
-        Artisan::call('tenants:db:seed', [
-            '--tenant' => $this->school->id,
-        ]);
+            // Run seeder
+            Artisan::call('db:seed', [
+                '--class' => 'Database\\Seeders\\TenantDatabaseSeeder',
+                '--force' => true,
+            ]);
+
+            // Assign role to admin user
+            $admin = \App\Models\User::where('email', $this->school->admin_email)->first();
+            if ($admin) {
+                $admin->assignRole('school_admin');
+            }
+
+        } catch (\Exception $e) {
+            \Log::error('Tenant Setup Failed: ' . $e->getMessage());
+            throw $e;
+        }
     }
 }

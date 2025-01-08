@@ -1,4 +1,4 @@
-@extends('layouts.auth-master')
+@extends('auth.auth-master')
 
 @section('content')
 <div class="d-flex flex-column flex-root">

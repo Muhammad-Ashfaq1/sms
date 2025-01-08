@@ -6,28 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('domain')->unique();
             $table->string('database')->unique();
+            $table->string('tenant_id');
             $table->string('address')->nullable();
-            $table->string('admin_name')->nullable();
             $table->string('admin_email')->unique();
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(true);
             $table->timestamps();
+
+            $table->foreign('tenant_id')
+                ->references('id')
+                ->on('tenants')
+                ->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('schools');
     }
