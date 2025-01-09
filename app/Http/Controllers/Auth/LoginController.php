@@ -35,7 +35,7 @@ class LoginController extends Controller
 
             // Check if user is super admin and redirect accordingly
             if (Auth::user()->hasRole('super_admin')) {
-                return redirect()->route('schools.index');
+                return redirect()->route('organization.index');
             }
 
             return redirect()->intended('home')->with('success', 'Successfully logged in!');

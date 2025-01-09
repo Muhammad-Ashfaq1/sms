@@ -1109,7 +1109,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="../../demo1/dist/apps/customers/list.html">
+                            <a class="menu-link" href="{{ route('organization.index') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>

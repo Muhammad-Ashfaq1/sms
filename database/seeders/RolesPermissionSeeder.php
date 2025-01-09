@@ -14,6 +14,7 @@ class RolesPermissionSeeder extends Seeder
         $roles = [
             'super_admin',
             'school_admin',
+            'Admin',
             'teacher',
             'student',
             'parents',
