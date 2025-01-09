@@ -16,5 +16,6 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         // ... other middlewares
         'central_domain' => \App\Http\Middleware\EnsureCentralDomain::class,
+        'tenant.auth' => \App\Http\Middleware\TenantAuthenticate::class,
     ];
 }

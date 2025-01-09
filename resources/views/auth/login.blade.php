@@ -17,19 +17,13 @@
                     <p class="fw-bold fs-2">Discover Amazing Metronic
                     <br />with great build tools</p>
                 </div>
-                <!--end::Content-->
             </div>
-            <!--end::Wrapper-->
         </div>
-        <!--end::Aside-->
-        <!--begin::Body-->
+
         <div class="d-flex flex-column flex-lg-row-fluid py-10">
-            <!--begin::Content-->
             <div class="d-flex flex-center flex-column flex-column-fluid">
-                <!--begin::Wrapper-->
                 <div class="w-lg-500px p-10 p-lg-15 mx-auto">
-                    <!--begin::Form-->
-                    <form class="form w-100" method="POST" action="{{ route('login') }}">
+                    <form class="form w-100" action="{{ route('login') }}" method="POST">
                         @csrf
                         <!--begin::Heading-->
                         <div class="text-center mb-10">
@@ -37,35 +31,37 @@
                             <div class="text-gray-400 fw-bold fs-4">New Here?
                             <a href="#" class="link-primary fw-bolder">Create an Account</a></div>
                         </div>
-                        <!--end::Heading-->
-                        <!--begin::Input group-->
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="fv-row mb-10">
                             <label class="form-label fs-6 fw-bolder text-dark">Email</label>
-                            <input class="form-control form-control-lg form-control-solid" type="email" name="email" autocomplete="off" />
+                            <input class="form-control form-control-lg" type="email" name="email" value="{{ old('email') }}" required autofocus />
                         </div>
                         <!--end::Input group-->
                         <!--begin::Input group-->
                         <div class="fv-row mb-10">
-                            <label class="form-label fs-6 fw-bolder text-dark">Password</label>
-                            <input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
+                            <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
+                            <input class="form-control form-control-lg" type="password" name="password" required />
                         </div>
-                        <!--end::Input group-->
-                        <!--begin::Actions-->
+
                         <div class="text-center">
                             <button type="submit" class="btn btn-lg btn-primary w-100 mb-5">
-                                <span class="indicator-label">Continue</span>
+                                Continue
                             </button>
                         </div>
-                        <!--end::Actions-->
                     </form>
-                    <!--end::Form-->
                 </div>
-                <!--end::Wrapper-->
             </div>
-            <!--end::Content-->
         </div>
-        <!--end::Body-->
     </div>
-    <!--end::Authentication - Sign-in-->
 </div>
 @endsection

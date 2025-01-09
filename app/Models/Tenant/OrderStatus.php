@@ -11,6 +11,8 @@ class OrderStatus extends Model
     protected $fillable = ['name'];
 
     const PAID = 'Paid';
+
     const PARTIALLY_PAID = 'Partially Paid';
+
     const NOT_PAID = 'Not Paid';
 }

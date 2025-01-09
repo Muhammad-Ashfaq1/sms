@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('discount_orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id')->nullable(); 
+            $table->unsignedBigInteger('order_id')->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->morphs('discountable'); 
-            $table->decimal('discount', 8, 2); 
-            $table->string('discount_type'); 
+            $table->morphs('discountable');
+            $table->decimal('discount', 8, 2);
+            $table->string('discount_type');
             $table->timestamps();
         });
     }

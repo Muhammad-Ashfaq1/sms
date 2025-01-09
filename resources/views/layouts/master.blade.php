@@ -36,10 +36,17 @@
     <!--begin::Page-->
     <div class="page d-flex flex-row flex-column-fluid">
         <!--begin::Aside-->
+{{--        @if(auth()->user()->hasRole('super_admin'))--}}
+{{--            @include('layouts.sidebar')--}}
+{{--        @else--}}
+{{--            @include('tenant.layouts.sidebar')--}}
+{{--        @endif--}}
+
         @include('layouts.sidebar')
         <!--end::Aside-->
         <!--begin::Wrapper-->
         <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+
            @include('layouts.nav-bar')
             <!--begin::Content-->
             <div class="content d-flex flex-column flex-column-fluid" id="kt_content">

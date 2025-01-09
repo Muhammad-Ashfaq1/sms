@@ -9,7 +9,7 @@ enum DiscountTypes: string
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             DiscountTypes::PERCENTAGE => 'percentage',
             DiscountTypes::FIXED => 'fixed',
         };

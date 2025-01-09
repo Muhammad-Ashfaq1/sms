@@ -15,7 +15,7 @@ class CustomerAddress extends Model
         'city',
         'state',
         'zip_code',
-        'is_default'
+        'is_default',
     ];
 
     protected $casts = [

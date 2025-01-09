@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'super_admin' => \App\Http\Middleware\SuperAdminMiddleware::class,
             'tenancy' => \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
             'prevent_access_from_central_domains' => \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
+            'tenant.auth' => \App\Http\Middleware\TenantAuthenticate::class,
         ]);
 
         // Priority for tenancy middleware

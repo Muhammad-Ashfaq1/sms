@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->dropColumn('paid_status');
-            $table->unsignedBigInteger('order_status_id')->nullable(); 
+            $table->unsignedBigInteger('order_status_id')->nullable();
             $table->foreign('order_status_id')->references('id')->on('order_statuses')->onDelete('cascade');
         });
     }

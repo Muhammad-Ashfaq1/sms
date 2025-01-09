@@ -10,7 +10,7 @@ enum OrderPaidStatus: string
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             OrderPaidStatus::PAID => 'Paid',
             OrderPaidStatus::NOT_PAID => 'Not Paid',
             OrderPaidStatus::PARTIALLY_PAID => 'Partially Paid',

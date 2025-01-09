@@ -25,5 +25,4 @@ class Aircraft extends Model
         'pressurized',
         'taa',
     ];
-
 }

@@ -2,24 +2,24 @@
 
 namespace App\Models\Tenant;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Stancl\Tenancy\Database\Concerns\TenantConnection;
-use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, TenantConnection, HasRoles;
+    use HasFactory, HasRoles, Notifiable, TenantConnection;
 
     protected $guard = 'tenant';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-
     protected $fillable = [
         'name',
         'email',
@@ -46,7 +46,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'last_login' => 'datetime'
+            'last_login' => 'datetime',
         ];
     }
 
@@ -64,6 +64,7 @@ class User extends Authenticatable
                 });
         });
     }
+
     public function cart()
     {
         return $this->hasMany(UserCart::class);

@@ -17,8 +17,8 @@ class Customer extends Model
         'customer_group_id',
     ];
 
-
-    public function getNameAttribute() {
+    public function getNameAttribute()
+    {
         return ucwords($this->first_name.' '.$this->last_name);
     }
 
@@ -44,7 +44,7 @@ class Customer extends Model
     {
         return $this->hasMany(CustomerAddress::class);
     }
-    
+
     public function deliveryAddress()
     {
         return $this->hasOne(CustomerAddress::class)->where('type', 1);

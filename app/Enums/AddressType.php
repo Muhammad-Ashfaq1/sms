@@ -9,9 +9,9 @@ enum AddressType: int
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             AddressType::DELIVERY => 'Delivery',
-            AddressType::BILLING  => 'Billing',
+            AddressType::BILLING => 'Billing',
         };
     }
 }

@@ -1,34 +1,34 @@
 <?php
 
 use App\Models\Tenant;
-use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Arr;
-//use App\Models\Tenant\RewardCard;
-//use App\Enums\DiscountTypes;
+use Ramsey\Uuid\Uuid;
 
-if (!function_exists('centralDomain')) {
+// use App\Models\Tenant\RewardCard;
+// use App\Enums\DiscountTypes;
+
+if (! function_exists('centralDomain')) {
     function centralDomain(): string
     {
         return parse_url(config('app.url'), PHP_URL_HOST);
     }
 }
 
-if (!function_exists('subdomain')) {
+if (! function_exists('subdomain')) {
     function subdomain(string $subdomain)
     {
-        return $subdomain . '.' . centralDomain();
+        return $subdomain.'.'.centralDomain();
     }
 }
 
-if (!function_exists('guard')) {
+if (! function_exists('guard')) {
     function guard(): string
     {
         return tenant('id') ? 'tenant' : 'web';
     }
 }
 
-
-if (!function_exists('generateUniqueTenant')) {
+if (! function_exists('generateUniqueTenant')) {
 
     function generateUniqueTenant()
     {
@@ -36,6 +36,7 @@ if (!function_exists('generateUniqueTenant')) {
         while (Tenant::where('id', $uniqueStr)->exists()) {
             $uniqueStr = Uuid::uuid4()->toString();
         }
+
         return $uniqueStr;
     }
 }

@@ -9,10 +9,9 @@ class RoleMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->user() || !$request->user()->hasRole('super_admin')) {
+        if (! $request->user() || ! $request->user()->hasRole('super_admin')) {
             abort(403, 'Unauthorized action.');
-        }
-        else{
+        } else {
             dd($request->all());
         }
 

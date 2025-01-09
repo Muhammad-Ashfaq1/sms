@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\{Cache};
 use Stancl\Tenancy\Contracts\TenantWithDatabase;
 use Stancl\Tenancy\Database\Concerns\CentralConnection;
 use Stancl\Tenancy\Database\Concerns\HasDatabase;
 use Stancl\Tenancy\Database\Concerns\HasDomains;
 use Stancl\Tenancy\Database\Models\Tenant as BaseTenant;
+
 class Tenant extends BaseTenant implements TenantWithDatabase
 {
-    use HasFactory,HasUuids,CentralConnection,HasDomains,HasDatabase;
+    use CentralConnection,HasDatabase,HasDomains,HasFactory,HasUuids;
 
     protected $fillable = [
         'id',
@@ -44,10 +44,10 @@ class Tenant extends BaseTenant implements TenantWithDatabase
 
     public function getSubdomainAttribute(): ?string
     {
-        return Str::of($this->domain)->before('.' . centralDomain());
+        return Str::of($this->domain)->before('.'.centralDomain());
     }
 
-    public function route(string $route, mixed $parameters = [], bool $absolute = true): string | array
+    public function route(string $route, mixed $parameters = [], bool $absolute = true): string|array
     {
         return tenant_route($this->domains->first()->domain, $route, $parameters, $absolute);
     }
@@ -62,5 +62,4 @@ class Tenant extends BaseTenant implements TenantWithDatabase
                 ->toArray();
         });
     }
-
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('reward_cards', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable(); 
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('title');
             $table->decimal('off_percentage', 8, 2);

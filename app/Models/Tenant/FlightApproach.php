@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FlightApproach extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'flight_id',
         'name',
@@ -22,7 +22,4 @@ class FlightApproach extends Model
     {
         return $this->belongsTo(Flight::class, 'flight_id');
     }
-
 }
-
-

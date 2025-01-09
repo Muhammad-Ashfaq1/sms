@@ -10,7 +10,7 @@ class School extends Model
     use HasDomains;
 
     protected $fillable = [
-        'name', 'address', 'database', 'domain', 'admin_email', 'tenant_id', 'status'
+        'name', 'address', 'database', 'domain', 'admin_email', 'tenant_id', 'status',
     ];
 
     public function tenant()

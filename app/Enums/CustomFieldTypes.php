@@ -5,11 +5,17 @@ namespace App\Enums;
 enum CustomFieldTypes: string
 {
     private const TEXT = 'Text';
+
     private const NUMERIC = 'Numeric';
+
     private const DECIMAL = 'Decimal';
+
     private const NUMBER = 'Number';
+
     private const DATE = 'Date';
+
     private const DATETIME = 'DateTime';
+
     private const BOOLEAN = 'Boolean';
 
     public static function options(): array
@@ -22,7 +28,7 @@ enum CustomFieldTypes: string
 
     public function getLabel(): string
     {
-        return match($this->getValue()) {
+        return match ($this->getValue()) {
             self::TEXT => 'Text',
             self::NUMERIC => 'Numeric',
             self::DECIMAL => 'Decimal',

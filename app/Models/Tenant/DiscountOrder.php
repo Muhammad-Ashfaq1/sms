@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DiscountOrder extends Model
 {
-    protected $table='discount_orders';
+    protected $table = 'discount_orders';
 
     protected $fillable = ['order_id', 'discountable_id', 'discountable_type', 'discount', 'discount_type'];
 

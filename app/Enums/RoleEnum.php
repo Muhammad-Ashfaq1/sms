@@ -8,7 +8,7 @@ enum RoleEnum: string
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             RoleEnum::ADMIN => 'Admin',
         };
     }

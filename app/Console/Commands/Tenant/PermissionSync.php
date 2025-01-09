@@ -30,7 +30,6 @@ class PermissionSync extends Command
     {
         //
 
-
         $tenant = $this->option('tenant');
         tenancy()->runForMultiple($tenant, function () {
             // Define the guard

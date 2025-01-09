@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Storage;
 
 class RewardCard extends Model
 {
-
     protected $table = 'reward_cards';
 
     protected $casts = [

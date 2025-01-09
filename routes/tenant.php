@@ -2,41 +2,47 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Tenant\ClassRoomController;
+use App\Http\Controllers\Tenant\StudentController;
 use App\Http\Controllers\Tenant\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
-
-/*
-|--------------------------------------------------------------------------
-| Tenant Routes
-|--------------------------------------------------------------------------
-|
-| Here you can register the tenant routes for your application.
-| These routes are loaded by the TenantRouteServiceProvider.
-|
-| Feel free to customize them however you want. Good luck!
-|
-*/
 
 Route::middleware([
     'web',
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
+    // Public routes
     Route::get('/', function () {
-        return 'This is your multi-tenant application. The id of the current tenant is '.tenant('id');
+        return view('tenant.welcome');
     });
 
-    // Teacher routes
-    Route::resource('teachers', TeacherController::class)->names('tenant.teachers');
+    // Auth routes
+    Route::middleware('guest')->group(function () {
+        Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+        Route::post('login', [LoginController::class, 'login']);
+    });
 
-    Route::get('/dashboard', function () {
-        // This will show the current tenant and logged in user
-        dd([
-            'tenant' => tenant()->id,
-            'user' => auth()->user(),
-            'roles' => auth()->user()->roles->pluck('name')
-        ]);
-    })->middleware('auth')->name('tenant.dashboard');
+    Route::post('logout', [LoginController::class, 'logout'])
+        ->name('logout')
+        ->middleware('auth');
+
+    // Protected routes
+    Route::middleware(['tenant.auth'])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('tenant.dashboard');
+        })->name('tenant.dashboard');
+
+        // Teacher routes
+        Route::resource('teachers', TeacherController::class)->names('tenant.teachers');
+
+        // Student routes
+        Route::resource('students', StudentController::class)->names('tenant.students');
+
+        // Class routes
+        Route::resource('classes', ClassRoomController::class)->names('tenant.classes');
+    });
 });

@@ -6,19 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrganizationRequest;
 use App\Jobs\SetupTenantJob;
 use App\Models\Tenant;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Artisan;
 
 class OrganizationController extends Controller
 {
     public $domain;
+
     public \App\Models\User $user;
 
     public function index()
     {
         // Get all tenants
         $tenants = Tenant::all();
+
         return view('admin.organization.index', compact('tenants'));
     }
 
@@ -35,20 +35,20 @@ class OrganizationController extends Controller
 
         // Create new tenant instance using mass assignment
         $tenant = Tenant::create([
-            'id'        => str_replace('-', '_', $tenantId) ,
-            'org_name'  => $request->org_name,
-            'email'     => $request->admin_email,
-            'status'    => $request->status,
+            'id' => str_replace('-', '_', $tenantId),
+            'org_name' => $request->org_name,
+            'email' => $request->admin_email,
+            'status' => $request->status,
         ]);
 
         // Create domain for tenant
         $pattern = '/(?:https?:\/\/)?([a-zA-Z0-9-]+)/';
         preg_match($pattern, $request->domain, $domain);
-        $tenant->domains()->create(['domain' => "{$domain[1]}." . centralDomain()]);
+        $tenant->domains()->create(['domain' => "{$domain[1]}.".centralDomain()]);
 
         // Prepare user data (admin user)
         $user = [
-            'email'    => $request->admin_email,
+            'email' => $request->admin_email,
             'password' => Hash::make('password'), // Generate password securely
         ];
 
@@ -58,5 +58,4 @@ class OrganizationController extends Controller
         // Redirect to organization index page after creation
         return redirect(route('organization.index'))->with('success', 'Organization created successfully.');
     }
-
 }

@@ -20,5 +20,4 @@ class FlightInstructor extends Model
     {
         return $this->belongsTo(Flight::class);
     }
-
 }

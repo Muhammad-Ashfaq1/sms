@@ -22,5 +22,4 @@ class FlightPerson extends Model
     {
         return $this->belongsTo(Flight::class);
     }
-
 }

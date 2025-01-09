@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tenant\Teacher;
-use App\Models\User;
+use App\Models\Tenant\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -14,6 +14,7 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = Teacher::with('user')->get();
+
         return view('tenant.teachers.index', compact('teachers'));
     }
 
@@ -26,11 +27,11 @@ class TeacherController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:tenant_users,email',
+            'email' => 'required|email|unique:users,email',
             'qualification' => 'required|string|max:255',
             'specialization' => 'required|string|max:255',
             'joining_date' => 'required|date',
-            'status' => 'required|boolean'
+            'status' => 'required|boolean',
         ]);
 
         DB::transaction(function () use ($request) {
@@ -38,7 +39,7 @@ class TeacherController extends Controller
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make('password') // Default password
+                'password' => Hash::make('password'), // Default password
             ]);
 
             // Assign teacher role
@@ -50,7 +51,7 @@ class TeacherController extends Controller
                 'qualification' => $request->qualification,
                 'specialization' => $request->specialization,
                 'joining_date' => $request->joining_date,
-                'status' => $request->status
+                'status' => $request->status,
             ]);
         });
 
@@ -67,18 +68,18 @@ class TeacherController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:tenant_users,email,' . $teacher->user_id,
+            'email' => 'required|email|unique:tenant_users,email,'.$teacher->user_id,
             'qualification' => 'required|string|max:255',
             'specialization' => 'required|string|max:255',
             'joining_date' => 'required|date',
-            'status' => 'required|boolean'
+            'status' => 'required|boolean',
         ]);
 
         DB::transaction(function () use ($request, $teacher) {
             // Update user
             $teacher->user->update([
                 'name' => $request->name,
-                'email' => $request->email
+                'email' => $request->email,
             ]);
 
             // Update teacher profile
@@ -86,7 +87,7 @@ class TeacherController extends Controller
                 'qualification' => $request->qualification,
                 'specialization' => $request->specialization,
                 'joining_date' => $request->joining_date,
-                'status' => $request->status
+                'status' => $request->status,
             ]);
         });
 

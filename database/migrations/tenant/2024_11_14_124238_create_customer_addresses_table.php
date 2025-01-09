@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('zip_code')->nullable();
-            $table->enum('type',[1,2])->nullable()->comment('1 = Delivery, 2 = Billing');
+            $table->enum('type', [1, 2])->nullable()->comment('1 = Delivery, 2 = Billing');
             $table->boolean('is_default')->default(0);
             $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

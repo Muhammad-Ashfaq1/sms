@@ -11,7 +11,7 @@ enum OrderSortings: string
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             OrderSortings::CUSTOMER_NAME => 'customer_name',
             OrderSortings::CREATED_AT => 'created_at',
             OrderSortings::ORDER_ID => 'id',

@@ -11,7 +11,7 @@ class EnsureCentralDomain
     {
         $centralDomains = config('tenancy.central_domains', []);
 
-        if (!in_array($request->getHost(), $centralDomains)) {
+        if (! in_array($request->getHost(), $centralDomains)) {
             abort(404);
         }
 

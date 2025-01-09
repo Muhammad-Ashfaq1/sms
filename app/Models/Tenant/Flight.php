@@ -32,6 +32,7 @@ class Flight extends Model
     {
         return $this->hasMany(FlightInstructor::class, 'flight_id');
     }
+
     public function flightPeoples()
     {
         return $this->hasMany(FlightPerson::class, 'flight_id');

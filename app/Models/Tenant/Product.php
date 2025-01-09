@@ -10,6 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $table = 'products';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -69,11 +70,10 @@ class Product extends Model
     public function scopeSearch($query, $search = null)
     {
         return $query->when($search, function ($query, $search) {
-            $query->where('name', 'like', '%' . $search . '%')
-                ->orWhere('alu', 'like', '%' . $search . '%')
-                ->orWhere('sku', 'like', '%' . $search . '%')
-                ->orWhere('barcode', 'like', '%' . $search . '%');
+            $query->where('name', 'like', '%'.$search.'%')
+                ->orWhere('alu', 'like', '%'.$search.'%')
+                ->orWhere('sku', 'like', '%'.$search.'%')
+                ->orWhere('barcode', 'like', '%'.$search.'%');
         })->orderBy('created_at', 'desc');
     }
-
 }

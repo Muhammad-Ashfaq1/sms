@@ -8,5 +8,5 @@ class ProductVolume extends Model
 {
     //
 
-    protected $fillable = ['quantity','price'];
+    protected $fillable = ['quantity', 'price'];
 }

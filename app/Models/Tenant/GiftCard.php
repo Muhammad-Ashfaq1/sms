@@ -8,7 +8,7 @@ class GiftCard extends Model
 {
     protected $table = 'gift_cards';
 
-    protected $fillable  = [
+    protected $fillable = [
         'user_id',
         'title',
         'value',
