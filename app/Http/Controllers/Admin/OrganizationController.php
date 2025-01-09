@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOrganizationRequest;
 use App\Jobs\SetupTenantJob;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
@@ -27,16 +28,8 @@ class OrganizationController extends Controller
         return view('admin.organization.create');
     }
 
-    public function storeOrganization(Request $request)
+    public function storeOrganization(StoreOrganizationRequest $request)
     {
-        // Validate the request input
-        $request->validate([
-            'org_name'    => 'required|string|max:255',
-            'domain'      => 'required|string|url',
-            'admin_email' => 'required|email|unique:users,email',
-            'status'      => 'required|in:0,1',
-        ]);
-
         // Generate a unique tenant ID
         $tenantId = generateUniqueTenant();
 

@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'tenant' => [
+            'driver' => 'session',
+            'provider' => 'tenant_users',
+        ],
     ],
 
     /*
@@ -69,6 +73,12 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        // Add the provider for tenant_users
+        'tenant_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Tenant\User::class, // Ensure this is the correct Tenant User model
+        ],
     ],
 
     /*
@@ -96,6 +106,12 @@ return [
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
+        ],
+
+        'tenant_users' => [
+            'provider' => 'tenant_users',
+            'table' => 'password_resets',
+            'expire' => 60,
         ],
     ],
 
