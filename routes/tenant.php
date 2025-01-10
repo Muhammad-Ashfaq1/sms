@@ -15,17 +15,15 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    // Public routes
     Route::get('/', function () {
-        return view('tenant.welcome');
-    });
-
-    // Auth routes
+        return auth()->check()
+            ? redirect()->route('tenant.dashboard')
+            : redirect()->route('login');
+    })->name('tenant.home');
     Route::middleware('guest')->group(function () {
         Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
         Route::post('login', [LoginController::class, 'login']);
     });
-
     Route::post('logout', [LoginController::class, 'logout'])
         ->name('logout')
         ->middleware('auth');
