@@ -18,8 +18,8 @@
         <!--end::Aside mobile toggle-->
         <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-            <a href="../../demo1/dist/index.html" class="d-lg-none">
-                <img alt="Logo" src="assets/media/logos/logo-2.svg" class="h-30px" />
+            <a href="" class="d-lg-none">
+                <img alt="Logo" src="{{ global_asset('assets/media/logos/logo-2.svg') }}" class="h-30px" />
             </a>
         </div>
         <!--end::Mobile logo-->
@@ -34,7 +34,7 @@
                     <!--begin::Menu-->
                     <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
                         <div class="menu-item me-lg-1">
-                            <a class="menu-link py-3" href="../../demo1/dist/index.html">
+                            <a class="menu-link py-3" href="">
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </div>
@@ -71,7 +71,7 @@
 																</span>
                                             <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px">
                                                 <div class="menu-item">
-                                                    <a class="menu-link py-3" href="../../demo1/dist/pages/profile/overview.html">
+                                                    <a class="menu-link py-3" href="">
 																			<span class="menu-bullet">
 																				<span class="bullet bullet-dot"></span>
 																			</span>
@@ -79,7 +79,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="menu-item">
-                                                    <a class="menu-link py-3" href="../../demo1/dist/pages/profile/projects.html">
+                                                    <a class="menu-link py-3" href="">
 																			<span class="menu-bullet">
 																				<span class="bullet bullet-dot"></span>
 																			</span>
@@ -87,7 +87,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="menu-item">
-                                                    <a class="menu-link py-3" href="../../demo1/dist/pages/profile/campaigns.html">
+                                                    <a class="menu-link py-3" href="">
 																			<span class="menu-bullet">
 																				<span class="bullet bullet-dot"></span>
 																			</span>
@@ -95,7 +95,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="menu-item">
-                                                    <a class="menu-link py-3" href="../../demo1/dist/pages/profile/documents.html">
+                                                    <a class="menu-link py-3" href="">
 																			<span class="menu-bullet">
 																				<span class="bullet bullet-dot"></span>
 																			</span>
@@ -103,7 +103,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="menu-item">
-                                                    <a class="menu-link py-3" href="../../demo1/dist/pages/profile/connections.html">
+                                                    <a class="menu-link py-3" href="">
 																			<span class="menu-bullet">
 																				<span class="bullet bullet-dot"></span>
 																			</span>
@@ -111,7 +111,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="menu-item">
-                                                    <a class="menu-link py-3" href="../../demo1/dist/pages/profile/activity.html">
+                                                    <a class="menu-link py-3" href="">
 																			<span class="menu-bullet">
 																				<span class="bullet bullet-dot"></span>
 																			</span>
@@ -130,7 +130,7 @@
 																</span>
                                             <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px">
                                                 <div class="menu-item">
-                                                    <a class="menu-link py-3" href="../../demo1/dist/pages/projects/list.html">
+                                                    <a class="menu-link py-3" href="">
 																			<span class="menu-bullet">
 																				<span class="bullet bullet-dot"></span>
 																			</span>
@@ -138,7 +138,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="menu-item">
-                                                    <a class="menu-link py-3" href="../../demo1/dist/pages/projects/project.html">
+                                                    <a class="menu-link py-3" href="">
 																			<span class="menu-bullet">
 																				<span class="bullet bullet-dot"></span>
 																			</span>
@@ -146,7 +146,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="menu-item">
-                                                    <a class="menu-link py-3" href="../../demo1/dist/pages/projects/targets.html">
+                                                    <a class="menu-link py-3" href="">
 																			<span class="menu-bullet">
 																				<span class="bullet bullet-dot"></span>
 																			</span>
@@ -154,7 +154,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="menu-item">
-                                                    <a class="menu-link py-3" href="../../demo1/dist/pages/projects/budget.html">
+                                                    <a class="menu-link py-3" href="">
 																			<span class="menu-bullet">
 																				<span class="bullet bullet-dot"></span>
 																			</span>

@@ -11,7 +11,7 @@
                 <!--begin::Content-->
                 <div class="d-flex flex-column text-center p-10 pt-lg-20">
                     <a href="#" class="mb-12">
-                        <img alt="Logo" src="assets/media/logos/logo-1.svg" class="h-40px" />
+                        <img alt="Logo" src="{{ global_asset('assets/media/logos/logo-1.svg') }}" class="h-40px" />
                     </a>
                     <h1 class="fw-bolder fs-2qx pb-5 pb-md-10">Welcome to Metronic</h1>
                     <p class="fw-bold fs-2">Discover Amazing Metronic

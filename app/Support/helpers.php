@@ -41,6 +41,13 @@ if (! function_exists('generateUniqueTenant')) {
     }
 }
 
+if (! function_exists('is_admin')) {
+    function is_admin(): bool
+    {
+        return !\tenant() && auth()->user()->hasRole('super_admin');
+    }
+}
+
 /*
 if (!function_exists('notify')) {
     function notify(array|string $notification, string $type = 'success', bool $returnArray = false)

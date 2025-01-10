@@ -21,13 +21,13 @@ foreach (config('tenancy.central_domains') as $domain) {
 
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('central.dashboard');
             // Super Admin routes
-                Route::resource('schools', SchoolController::class);
-                // Organization management routes
-                Route::prefix('organization')->as('organization.')->controller(OrganizationController::class)->group(function () {
-                    Route::get('/', 'index')->name('index');
-                    Route::get('/create', 'create')->name('create');
-                    Route::post('/store', 'storeOrganization')->name('store');
-                });
+            Route::resource('schools', SchoolController::class);
+            // Organization management routes
+            Route::prefix('organization')->as('organization.')->controller(OrganizationController::class)->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'storeOrganization')->name('store');
+            });
         });
     });
 }
