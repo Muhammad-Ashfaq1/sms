@@ -24,7 +24,7 @@ class StoreOrganizationRequest extends FormRequest
         return [
             'org_name' => 'required|string|max:255',
             'domain' => 'required|string|url',
-            'admin_email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:users,email',
             'status' => 'required|in:0,1',
         ];
     }

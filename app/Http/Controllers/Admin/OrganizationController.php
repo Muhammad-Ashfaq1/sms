@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrganizationRequest;
 use App\Jobs\SetupTenantJob;
 use App\Models\Tenant;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class OrganizationController extends Controller
@@ -37,7 +38,7 @@ class OrganizationController extends Controller
         $tenant = Tenant::create([
             'id' => str_replace('-', '_', $tenantId),
             'org_name' => $request->org_name,
-            'email' => $request->admin_email,
+            'email' => $request->email,
             'status' => $request->status,
         ]);
 
@@ -48,7 +49,7 @@ class OrganizationController extends Controller
 
         // Prepare user data (admin user)
         $user = [
-            'email' => $request->admin_email,
+            'email' => $request->email,
             'password' => Hash::make('password'), // Generate password securely
         ];
 
@@ -58,4 +59,18 @@ class OrganizationController extends Controller
         // Redirect to organization index page after creation
         return redirect(route('organization.index'))->with('success', 'Organization created successfully.');
     }
+
+    public function edit($tenant)
+    {
+        $tenant = Tenant::whereId($tenant)->first();
+        return view('admin.organization.create', compact('tenant'));
+    }
+
+    public function update(StoreOrganizationRequest $request, $tenantId)
+    {
+        $tenant = Tenant::whereId($tenantId);
+        $tenant->update($request->validated());
+        return redirect()->route('organization.index')->with('success', 'Organization updated successfully.');
+    }
+
 }

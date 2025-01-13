@@ -13,16 +13,16 @@
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Keenthemes | Metronic" />
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="{{ global_asset('assets/media/logos/favicon.ico') }}" />
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
     <!--begin::Page Vendor Stylesheets(used by this page)-->
-    <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{ global_asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Page Vendor Stylesheets-->
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{ global_asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ global_asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
     @yield('extra-css')
     <!--end::Global Stylesheets Bundle-->
@@ -36,12 +36,6 @@
     <!--begin::Page-->
     <div class="page d-flex flex-row flex-column-fluid">
         <!--begin::Aside-->
-{{--        @if(auth()->user()->hasRole('super_admin'))--}}
-{{--            @include('layouts.sidebar')--}}
-{{--        @else--}}
-{{--            @include('tenant.layouts.sidebar')--}}
-{{--        @endif--}}
-
         @include('layouts.sidebar')
         <!--end::Aside-->
         <!--begin::Wrapper-->
@@ -2976,17 +2970,17 @@
 <script>var hostUrl = "assets/";</script>
 <!--begin::Javascript-->
 <!--begin::Global Javascript Bundle(used by all pages)-->
-<script src="assets/plugins/global/plugins.bundle.js"></script>
-<script src="assets/js/scripts.bundle.js"></script>
+<script src="{{ global_asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+<script src="{{ global_asset('assets/js/scripts.bundle.js') }}"></script>
 <!--end::Global Javascript Bundle-->
 <!--begin::Page Vendors Javascript(used by this page)-->
-<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+<script src="{{ global_asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
 <!--end::Page Vendors Javascript-->
 <!--begin::Page Custom Javascript(used by this page)-->
-<script src="assets/js/custom/widgets.js"></script>
-<script src="assets/js/custom/apps/chat/chat.js"></script>
-<script src="assets/js/custom/modals/create-app.js"></script>
-<script src="assets/js/custom/modals/upgrade-plan.js"></script>
+<script src="{{ global_asset('assets/js/custom/widgets.js') }}"></script>
+<script src="{{ global_asset('assets/js/custom/apps/chat/chat.js') }}"></script>
+<script src="{{ global_asset('assets/js/custom/modals/create-app.js') }}"></script>
+<script src="{{ global_asset('assets/js/custom/modals/upgrade-plan.js') }}"></script>
 
 @yield('extra-js')
 <!--end::Page Custom Javascript-->

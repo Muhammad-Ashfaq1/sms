@@ -58,9 +58,10 @@ class StudentController extends Controller
             ->with('success', 'Student created successfully.');
     }
 
-    public function edit(Student $student)
+    public function edit($student)
     {
-        return view('tenant.students.edit', compact('student'));
+        $student = Student::whereId($student)->first();
+        return view('tenant.students.create', compact('student'));
     }
 
     public function update(Request $request, Student $student)

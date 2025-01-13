@@ -23,14 +23,14 @@
                         <tr>
                             <td>{{ @$tenant->name }}</td>
                             <td>{{ @$tenant->domain }}</td>
-                            <td>{{ @$tenant->admin_email }}</td>
+                            <td>{{ @$tenant->email }}</td>
                             <td>
                             <span class="badge badge-{{ @$tenant->status ? 'success' : 'danger' }}">
                                 {{ @$tenant->status ? 'Active' : 'Inactive' }}
                             </span>
                             </td>
                             <td>
-                                <a href="{{ route('schools.edit', @$tenant) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{ route('organization.edit' , @$tenant->id) }}" class="btn btn-sm btn-primary">Edit</a>
                             </td>
                         </tr>
                     @endforeach
