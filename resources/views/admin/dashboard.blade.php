@@ -2664,3 +2664,10 @@
     <!--end::Row-->
 
 @endsection
+@section('extra-js')
+    <script>
+        $(document).ready(function() {
+            console.log('Document is ready!');
+        });
+    </script>
+@endsection

@@ -18,8 +18,9 @@ class CreateTenantsTable extends Migration
             $table->string('org_name')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable();
-            $table->string('zip')->nullable();
+            $table->string('address')->nullable();
             $table->json('data')->nullable();
+            $table->json('status')->nullable();
             $table->timestamps();
         });
     }

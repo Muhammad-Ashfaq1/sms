@@ -22,7 +22,8 @@ class Tenant extends BaseTenant implements TenantWithDatabase
         'org_name',
         'email',
         'phone',
-        'zip',
+        'status',
+        'address'
     ];
 
     public static function getCustomColumns(): array
@@ -33,7 +34,8 @@ class Tenant extends BaseTenant implements TenantWithDatabase
             'data',
             'email',
             'phone',
-            'zip',
+            'status',
+            'address'
         ];
     }
 
