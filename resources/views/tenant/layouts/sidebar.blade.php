@@ -2,7 +2,7 @@
     <div class="aside-toolbar flex-column-auto" id="kt_aside_toolbar">
         <div class="aside-user d-flex align-items-sm-center justify-content-center py-5">
             <div class="symbol symbol-50px">
-                <img src="{{ asset('assets/media/avatars/300-1.jpg') }}" alt="" />
+                <img src="{{ global_asset('assets/media/avatars/300-1.jpg') }}" alt="" />
             </div>
             <div class="aside-user-info flex-row-fluid flex-wrap ms-5">
                 <div class="d-flex">
@@ -57,6 +57,15 @@
                             <i class="bi bi-building fs-3"></i>
                         </span>
                         <span class="menu-title">Classes</span>
+                    </a>
+                </div>
+
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('tenant.sections.*') ? 'active' : '' }}" href="{{ route('tenant.sections.index') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-grid fs-3"></i>
+                        </span>
+                        <span class="menu-title">Sections</span>
                     </a>
                 </div>
             </div>

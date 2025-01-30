@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Tenant\ClassRoomController;
 use App\Http\Controllers\Tenant\StudentController;
 use App\Http\Controllers\Tenant\TeacherController;
+use App\Http\Controllers\Tenant\SectionController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -42,5 +43,8 @@ Route::middleware([
 
         // Class routes
         Route::resource('classes', ClassRoomController::class)->names('tenant.classes');
+
+        // Section routes
+        Route::resource('sections', SectionController::class)->names('tenant.sections');
     });
 });

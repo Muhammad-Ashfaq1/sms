@@ -89,6 +89,18 @@
                                         <span class="menu-title">Students</span>
                                     </a>
                                 </div>
+
+                                <div class="menu-item">
+                                    <a class="menu-link {{ request()->routeIs('tenant.sections.*') ? 'active' : '' }}" href="{{ route('tenant.sections.index') }}">
+                                        <span class="menu-icon">
+                                            <i class="bi bi-grid fs-3"></i>
+                                        </span>
+                                        <span class="menu-title">Sections</span>
+                                    </a>
+                                </div>
+
+
+
                             </div>
                         </div>
                     </div>
