@@ -63,8 +63,9 @@ class TeacherController extends Controller
             ->with('success', 'Teacher created successfully.');
     }
 
-    public function edit(Teacher $teacher)
+    public function edit($teacher_id)
     {
+        $teacher = Teacher::where('id', $teacher_id)->first();
         $teacher->load('user');
         if (request()->ajax()) {
             return response()->json($teacher);
@@ -72,16 +73,18 @@ class TeacherController extends Controller
         return view('tenant.teachers.edit', compact('teacher'));
     }
 
-    public function update(Request $request, Teacher $teacher)
+    public function update(Request $request, $teacher_id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,'.$teacher->user_id,
+//            'email' => 'required|email|unique:users,email,'.$teacher->user_id,
             'qualification' => 'required|string|max:255',
             'specialization' => 'required|string|max:255',
             'joining_date' => 'required|date',
             'status' => 'required|boolean',
         ]);
+
+        $teacher = Teacher::where('id', $teacher_id)->first();
 
         DB::transaction(function () use ($request, $teacher) {
             $teacher->user->update([

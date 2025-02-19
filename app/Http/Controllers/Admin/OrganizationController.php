@@ -7,6 +7,7 @@ use App\Http\Requests\StoreOrganizationRequest;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Artisan;
 use App\Jobs\SetupTenantJob;
 
 class OrganizationController extends Controller
@@ -50,7 +51,7 @@ class OrganizationController extends Controller
         SetupTenantJob::dispatch($tenant, $user);
 
         // Run permission sync for the new tenant
-        \Artisan::call('sms:permission-sync', [
+        Artisan::call('sms:permission-sync', [
             '--tenant' => [$tenant->id]
         ]);
 
