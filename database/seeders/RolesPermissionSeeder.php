@@ -11,13 +11,13 @@ class RolesPermissionSeeder extends Seeder
     {
         // Define the roles and their respective guard_name
         $roles = [
-            'super_admin' => 'web',       // Adjust guard as needed
+            'super_admin' => 'web',
             'school_admin' => 'web',
-            'Admin' => 'tenant',          // Example: 'tenant' guard for tenant users
-            'teacher' => 'web',
-            'student' => 'web',
-            'parents' => 'web',
-            'nt-staff' => 'web',
+            'admin' => 'tenant',
+            'teacher' => 'tenant',
+            'student' => 'tenant',
+            'parents' => 'tenant',
+            'nt-staff' => 'tenant',
         ];
 
         foreach ($roles as $role => $guard) {

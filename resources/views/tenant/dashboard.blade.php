@@ -48,7 +48,8 @@
                     <span class="bullet bullet-vertical h-40px bg-warning"></span>
                     <div class="flex-grow-1 ms-4">
                         <a href="{{ route('tenant.classes.index') }}" class="text-gray-800 text-hover-primary fw-bolder fs-6">Total Classes</a>
-                        <span class="text-muted fw-bold d-block">{{ \App\Models\Tenant\ClassRoom::count() }}</span>
+                        <span class="text-muted fw-bold d-block">10</span>
+{{--                        <span class="text-muted fw-bold d-block">{{ \App\Models\Tenant\ClassRoom::count() }}</span>--}}
                     </div>
                 </div>
             </div>

@@ -46,7 +46,13 @@ class OrganizationController extends Controller
             'email' => $request->email,
             'password' => Hash::make('password'), // Generate password securely
         ];
+
         SetupTenantJob::dispatch($tenant, $user);
+
+        // Run permission sync for the new tenant
+        \Artisan::call('sms:permission-sync', [
+            '--tenant' => [$tenant->id]
+        ]);
 
         return $this->latestRecords();
     }

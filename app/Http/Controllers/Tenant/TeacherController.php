@@ -39,7 +39,7 @@ class TeacherController extends Controller
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make('password'), // Default password
+                'password' => Hash::make('password'),
             ]);
 
             // Assign teacher role

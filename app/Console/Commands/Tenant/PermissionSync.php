@@ -28,8 +28,6 @@ class PermissionSync extends Command
      */
     public function handle()
     {
-        //
-
         $tenant = $this->option('tenant');
         tenancy()->runForMultiple($tenant, function () {
             // Define the guard
@@ -37,15 +35,29 @@ class PermissionSync extends Command
 
             // Permissions with human-readable labels
             $permissions = [
+                // User management permissions
                 ['name' => 'users.create', 'display_name' => 'Create Users'],
                 ['name' => 'users.view', 'display_name' => 'View Users'],
                 ['name' => 'users.update', 'display_name' => 'Update Users'],
                 ['name' => 'users.delete', 'display_name' => 'Delete Users'],
 
+                // Role management permissions
                 ['name' => 'roles.create', 'display_name' => 'Create Roles'],
                 ['name' => 'roles.view', 'display_name' => 'View Roles'],
                 ['name' => 'roles.update', 'display_name' => 'Update Roles'],
                 ['name' => 'roles.delete', 'display_name' => 'Delete Roles'],
+
+                // Student management permissions
+                ['name' => 'students.create', 'display_name' => 'Create Students'],
+                ['name' => 'students.view', 'display_name' => 'View Students'],
+                ['name' => 'students.update', 'display_name' => 'Update Students'],
+                ['name' => 'students.delete', 'display_name' => 'Delete Students'],
+
+                // Teacher management permissions
+                ['name' => 'teachers.create', 'display_name' => 'Create Teachers'],
+                ['name' => 'teachers.view', 'display_name' => 'View Teachers'],
+                ['name' => 'teachers.update', 'display_name' => 'Update Teachers'],
+                ['name' => 'teachers.delete', 'display_name' => 'Delete Teachers'],
             ];
 
             // Create permissions
@@ -56,11 +68,29 @@ class PermissionSync extends Command
                 );
             }
 
-            // Create Admin Role
-            $adminRole = Role::firstOrCreate(['name' => RoleEnum::ADMIN->value, 'guard_name' => $guardName]);
+            // Create roles and assign permissions
+            $roles = [
+                RoleEnum::ADMIN->value => $permissions,
+                'teacher' => [
+                    'students.view',
+                    'teachers.view',
+                ],
+                'student' => [
+                    'students.view',
+                ],
+                'parent' => [
+                    'students.view',
+                ],
+                'nt-staff' => [
+                    'students.view',
+                    'teachers.view',
+                ],
+            ];
 
-            // Assign all permissions to Admin Role
-            $adminRole->syncPermissions(array_column($permissions, 'name'));
+            foreach ($roles as $roleName => $rolePermissions) {
+                $role = Role::firstOrCreate(['name' => $roleName, 'guard_name' => $guardName]);
+                $role->syncPermissions(is_array($rolePermissions) ? array_column($rolePermissions, 'name') : $rolePermissions);
+            }
         });
     }
 }
