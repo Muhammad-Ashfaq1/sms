@@ -34,7 +34,7 @@ class SetupTenantJob implements ShouldQueue
 
             // Sync permissions for the tenant
             Log::info('Starting permission sync for tenant: '.$this->tenant->id);
-            $syncOutput = Artisan::call('tiedown:permission-sync', ['--tenant' => $this->tenant->id]);
+            $syncOutput = Artisan::call('sms:permission-sync', ['--tenant' => $this->tenant->id]);
             Log::info('Sync Output for tenant '.$this->tenant->id.': '.$syncOutput);
 
             // Switch to tenant's database connection
