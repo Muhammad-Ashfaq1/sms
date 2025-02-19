@@ -14,7 +14,6 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::with('user')->get();
-
         return view('tenant.students.index', compact('students'));
     }
 
@@ -43,6 +42,8 @@ class StudentController extends Controller
                 'password' => Hash::make('password'), // Default password
             ]);
 
+            $user->assignRole('student');
+
             Student::create([
                 'user_id' => $user->id,
                 'roll_number' => $request->roll_number,
@@ -54,14 +55,25 @@ class StudentController extends Controller
             ]);
         });
 
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Student created successfully',
+                'html' => view('tenant.students.table', ['students' => Student::with('user')->get()])->render()
+            ]);
+        }
+
         return redirect()->route('tenant.students.index')
             ->with('success', 'Student created successfully.');
     }
 
-    public function edit($student)
+    public function edit(Student $student)
     {
-        $student = Student::whereId($student)->first();
-        return view('tenant.students.create', compact('student'));
+        $student->load('user');
+        if (request()->ajax()) {
+            return response()->json($student);
+        }
+        return view('tenant.students.edit', compact('student'));
     }
 
     public function update(Request $request, Student $student)
@@ -93,6 +105,14 @@ class StudentController extends Controller
             ]);
         });
 
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Student updated successfully',
+                'html' => view('tenant.students.table', ['students' => Student::with('user')->get()])->render()
+            ]);
+        }
+
         return redirect()->route('tenant.students.index')
             ->with('success', 'Student updated successfully.');
     }
@@ -101,7 +121,16 @@ class StudentController extends Controller
     {
         DB::transaction(function () use ($student) {
             $student->user->delete();
+            $student->delete();
         });
+
+        if (request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Student deleted successfully',
+                'html' => view('tenant.students.table', ['students' => Student::with('user')->get()])->render()
+            ]);
+        }
 
         return redirect()->route('tenant.students.index')
             ->with('success', 'Student deleted successfully.');

@@ -31,11 +31,9 @@ class Tenant extends BaseTenant implements TenantWithDatabase
         return [
             'id',
             'org_name',
-            'data',
             'email',
-            'phone',
             'status',
-            'address'
+            'address',
         ];
     }
 

@@ -14,7 +14,6 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = Teacher::with('user')->get();
-
         return view('tenant.teachers.index', compact('teachers'));
     }
 
@@ -35,17 +34,14 @@ class TeacherController extends Controller
         ]);
 
         DB::transaction(function () use ($request) {
-            // Create user
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make('password'),
             ]);
 
-            // Assign teacher role
             $user->assignRole('teacher');
 
-            // Create teacher profile
             Teacher::create([
                 'user_id' => $user->id,
                 'qualification' => $request->qualification,
@@ -55,12 +51,24 @@ class TeacherController extends Controller
             ]);
         });
 
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Teacher created successfully',
+                'html' => view('tenant.teachers.table', ['teachers' => Teacher::with('user')->get()])->render()
+            ]);
+        }
+
         return redirect()->route('tenant.teachers.index')
             ->with('success', 'Teacher created successfully.');
     }
 
     public function edit(Teacher $teacher)
     {
+        $teacher->load('user');
+        if (request()->ajax()) {
+            return response()->json($teacher);
+        }
         return view('tenant.teachers.edit', compact('teacher'));
     }
 
@@ -68,7 +76,7 @@ class TeacherController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:tenant_users,email,'.$teacher->user_id,
+            'email' => 'required|email|unique:users,email,'.$teacher->user_id,
             'qualification' => 'required|string|max:255',
             'specialization' => 'required|string|max:255',
             'joining_date' => 'required|date',
@@ -76,13 +84,11 @@ class TeacherController extends Controller
         ]);
 
         DB::transaction(function () use ($request, $teacher) {
-            // Update user
             $teacher->user->update([
                 'name' => $request->name,
                 'email' => $request->email,
             ]);
 
-            // Update teacher profile
             $teacher->update([
                 'qualification' => $request->qualification,
                 'specialization' => $request->specialization,
@@ -91,6 +97,14 @@ class TeacherController extends Controller
             ]);
         });
 
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Teacher updated successfully',
+                'html' => view('tenant.teachers.table', ['teachers' => Teacher::with('user')->get()])->render()
+            ]);
+        }
+
         return redirect()->route('tenant.teachers.index')
             ->with('success', 'Teacher updated successfully.');
     }
@@ -98,8 +112,17 @@ class TeacherController extends Controller
     public function destroy(Teacher $teacher)
     {
         DB::transaction(function () use ($teacher) {
-            $teacher->user->delete(); // This will cascade delete the teacher record
+            $teacher->user->delete();
+            $teacher->delete();
         });
+
+        if (request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Teacher deleted successfully',
+                'html' => view('tenant.teachers.table', ['teachers' => Teacher::with('user')->get()])->render()
+            ]);
+        }
 
         return redirect()->route('tenant.teachers.index')
             ->with('success', 'Teacher deleted successfully.');
