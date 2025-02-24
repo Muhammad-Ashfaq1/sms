@@ -232,7 +232,7 @@
                             <!--begin::Timeline heading-->
                             <div class="pe-3 mb-5">
                                 <!--begin::Title-->
-                                <div class="fs-5 fw-bold mb-2">There are 2 new tasks for you in “AirPlus Mobile APp” project:</div>
+                                <div class="fs-5 fw-bold mb-2">There are 2 new tasks for you in "AirPlus Mobile APp" project:</div>
                                 <!--end::Title-->
                                 <!--begin::Description-->
                                 <div class="d-flex align-items-center mt-1 fs-6">
@@ -500,7 +500,7 @@
                                 <!--begin::Title-->
                                 <div class="fs-5 fw-bold mb-2">Task
                                     <a href="#" class="text-primary fw-bolder me-1">#45890</a>merged with
-                                    <a href="#" class="text-primary fw-bolder me-1">#45890</a>in “Ads Pro Admin Dashboard project:</div>
+                                    <a href="#" class="text-primary fw-bolder me-1">#45890</a>in "Ads Pro Admin Dashboard project:</div>
                                 <!--end::Title-->
                                 <!--begin::Description-->
                                 <div class="d-flex align-items-center mt-1 fs-6">
@@ -948,7 +948,7 @@
                         </div>
                         <!--end::User-->
                         <!--begin::Text-->
-                        <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end" data-kt-element="message-text">Hey there, we’re just writing to let you know that you’ve been subscribed to a repository on GitHub.</div>
+                        <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end" data-kt-element="message-text">Hey there, we're just writing to let you know that you've been subscribed to a repository on GitHub.</div>
                         <!--end::Text-->
                     </div>
                     <!--end::Wrapper-->
@@ -1000,7 +1000,7 @@
                         </div>
                         <!--end::User-->
                         <!--begin::Text-->
-                        <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end" data-kt-element="message-text">You’ll receive notifications for all issues, pull requests!</div>
+                        <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end" data-kt-element="message-text">You'll receive notifications for all issues, pull requests!</div>
                         <!--end::Text-->
                     </div>
                     <!--end::Wrapper-->
@@ -2587,7 +2587,7 @@
                                 <div class="tab-pane fade show active" id="kt_upgrade_plan_startup">
                                     <!--begin::Heading-->
                                     <div class="pb-5">
-                                        <h2 class="fw-bolder text-dark">What’s in Startup Plan?</h2>
+                                        <h2 class="fw-bolder text-dark">What's in Startup Plan?</h2>
                                         <div class="text-muted fw-bold">Optimal for 10+ team size and new startup</div>
                                     </div>
                                     <!--end::Heading-->
@@ -2696,7 +2696,7 @@
                                 <div class="tab-pane fade" id="kt_upgrade_plan_advanced">
                                     <!--begin::Heading-->
                                     <div class="pb-5">
-                                        <h2 class="fw-bolder text-dark">What’s in Startup Plan?</h2>
+                                        <h2 class="fw-bolder text-dark">What's in Startup Plan?</h2>
                                         <div class="text-muted fw-bold">Optimal for 100+ team size and grown company</div>
                                     </div>
                                     <!--end::Heading-->
@@ -2803,7 +2803,7 @@
                                 <div class="tab-pane fade" id="kt_upgrade_plan_enterprise">
                                     <!--begin::Heading-->
                                     <div class="pb-5">
-                                        <h2 class="fw-bolder text-dark">What’s in Startup Plan?</h2>
+                                        <h2 class="fw-bolder text-dark">What's in Startup Plan?</h2>
                                         <div class="text-muted fw-bold">Optimal for 1000+ team and enterpise</div>
                                     </div>
                                     <!--end::Heading-->
@@ -2954,6 +2954,7 @@
 <script src="{{ global_asset('assets/js/custom/apps/chat/chat.js') }}"></script>
 <script src="{{ global_asset('assets/js/custom/modals/create-app.js') }}"></script>
 <script src="{{ global_asset('assets/js/custom/modals/upgrade-plan.js') }}"></script>
+<script src="{{ global_asset('assets/js/delete-confirmation.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

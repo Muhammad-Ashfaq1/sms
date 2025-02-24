@@ -117,8 +117,9 @@ class TeacherController extends Controller
             ->with('success', 'Teacher updated successfully.');
     }
 
-    public function destroy(Teacher $teacher)
+    public function destroy($teacher_id)
     {
+        $teacher = Teacher::findOrFail($teacher_id);
         DB::transaction(function () use ($teacher) {
             $teacher->user->delete();
             $teacher->delete();

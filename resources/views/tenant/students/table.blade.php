@@ -25,11 +25,10 @@
             </td>
             <td>
                 <a href="javascript:;" class="btn btn-sm btn-primary edit-btn" data-id="{{ $student->id }}">Edit</a>
-                <form action="{{ route('tenant.students.destroy', $student) }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                </form>
+                <a href="javascript:;" class="btn btn-sm btn-danger delete-btn"
+                   onclick="confirmDelete('{{ route('tenant.students.destroy', $student->id) }}', '{{ csrf_token() }}')">
+                    Delete
+                </a>
             </td>
         </tr>
         @endforeach
