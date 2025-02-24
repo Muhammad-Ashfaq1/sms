@@ -65,26 +65,31 @@ class TeacherController extends Controller
 
     public function edit($teacher_id)
     {
-        $teacher = Teacher::where('id', $teacher_id)->first();
-        $teacher->load('user');
+        $teacher = Teacher::with('user')->findOrFail($teacher_id);
+
         if (request()->ajax()) {
+            // Format the date to ensure consistency
+            $teacher->joining_date = $teacher->joining_date->format('Y-m-d');
             return response()->json($teacher);
         }
+
         return view('tenant.teachers.edit', compact('teacher'));
     }
 
     public function update(Request $request, $teacher_id)
     {
+        // Get the teacher first
+        $teacher = Teacher::findOrFail($teacher_id);
+
+        // Then validate with the correct user_id
         $request->validate([
             'name' => 'required|string|max:255',
-//            'email' => 'required|email|unique:users,email,'.$teacher->user_id,
+            'email' => 'required|email|unique:users,email,'.$teacher->user_id,
             'qualification' => 'required|string|max:255',
             'specialization' => 'required|string|max:255',
             'joining_date' => 'required|date',
             'status' => 'required|boolean',
         ]);
-
-        $teacher = Teacher::where('id', $teacher_id)->first();
 
         DB::transaction(function () use ($request, $teacher) {
             $teacher->user->update([

@@ -8,6 +8,7 @@ use App\Http\Controllers\Tenant\StudentController;
 use App\Http\Controllers\Tenant\TeacherController;
 use App\Http\Controllers\Tenant\SectionController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
@@ -17,7 +18,7 @@ Route::middleware([
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
     Route::get('/', function () {
-        return auth()->check()
+        return Auth::check()
             ? redirect()->route('tenant.dashboard')
             : redirect()->route('login');
     })->name('tenant.home');
