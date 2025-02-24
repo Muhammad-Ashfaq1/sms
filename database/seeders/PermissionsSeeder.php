@@ -20,21 +20,6 @@ class PermissionsSeeder extends Seeder
 
             // Permissions with human-readable labels
             $permissions = [
-                ['name' => 'categories.create', 'display_name' => 'Create Categories'],
-                ['name' => 'categories.view', 'display_name' => 'View Categories'],
-                ['name' => 'categories.update', 'display_name' => 'Update Categories'],
-                ['name' => 'categories.delete', 'display_name' => 'Delete Categories'],
-
-                ['name' => 'customers.create', 'display_name' => 'Create Customers'],
-                ['name' => 'customers.view', 'display_name' => 'View Customers'],
-                ['name' => 'customers.update', 'display_name' => 'Update Customers'],
-                ['name' => 'customers.delete', 'display_name' => 'Delete Customers'],
-
-                ['name' => 'products.create', 'display_name' => 'Create Products'],
-                ['name' => 'products.view', 'display_name' => 'View Products'],
-                ['name' => 'products.update', 'display_name' => 'Update Products'],
-                ['name' => 'products.delete', 'display_name' => 'Delete Products'],
-
                 ['name' => 'users.create', 'display_name' => 'Create Users'],
                 ['name' => 'users.view', 'display_name' => 'View Users'],
                 ['name' => 'users.update', 'display_name' => 'Update Users'],

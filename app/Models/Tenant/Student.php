@@ -4,9 +4,11 @@ namespace App\Models\Tenant;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Permission\Traits\HasRoles;
 
 class Student extends Model
 {
+    use HasRoles;
     protected $fillable = [
         'user_id',
         'roll_number',

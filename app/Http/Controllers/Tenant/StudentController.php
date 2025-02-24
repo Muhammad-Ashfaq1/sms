@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Tenant\Student;
-use App\Models\User;
+use App\Models\Tenant\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -22,19 +24,8 @@ class StudentController extends Controller
         return view('tenant.students.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreStudentRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'roll_number' => 'required|string|unique:students,roll_number',
-            'date_of_birth' => 'required|date',
-            'parent_name' => 'required|string',
-            'parent_phone' => 'required|string',
-            'address' => 'required|string',
-            'status' => 'required|boolean',
-        ]);
-
         DB::transaction(function () use ($request) {
             $user = User::create([
                 'name' => $request->name,
@@ -67,17 +58,19 @@ class StudentController extends Controller
             ->with('success', 'Student created successfully.');
     }
 
-    public function edit(Student $student)
+    public function edit($student_id)
     {
-        $student->load('user');
+        $student = Student::with('user')->findOrFail($student_id);
+
         if (request()->ajax()) {
+            $student->date_of_birth = $student->date_of_birth->format('Y-m-d');
             return response()->json($student);
         }
-        return view('tenant.students.edit', compact('student'));
     }
 
-    public function update(Request $request, Student $student)
+    public function update(Request $request, $student_id)
     {
+        $student = Student::findOrFail($student_id);
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,'.$student->user_id,
@@ -117,8 +110,9 @@ class StudentController extends Controller
             ->with('success', 'Student updated successfully.');
     }
 
-    public function destroy(Student $student)
+    public function destroy($student_id)
     {
+        $student = Student::findOrFail($student_id);
         DB::transaction(function () use ($student) {
             $student->user->delete();
             $student->delete();
